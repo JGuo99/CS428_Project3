@@ -11,10 +11,11 @@ public class triggerEvent : MonoBehaviour
 
     void Start () {
         audioSource.GetComponent<AudioSource>();
-        
+
     }
 
     void OnTriggerEnter (Collider other) {
+      if (other.tag == "Player") {
         if (audioPlayed == false) {
             audioPlayed = true;
             Debug.Log("Enter If Loop");
@@ -22,14 +23,17 @@ public class triggerEvent : MonoBehaviour
             // audioSource.PlayOneShot(audioSource.clip, 1f);
             if (!audioSource.isPlaying) {
                 audioSource.Play();
-            }            
+            }
         }
         Debug.Log("Exit If Loop");
+      }
   }
 
     void OnTriggerExit (Collider other) {
+      if (other.tag == "Player") {
         Debug.Log("Enter Exit Trigger");
         anima.SetBool("active 0", false);
         audioPlayed = false;
+      }
     }
 }
